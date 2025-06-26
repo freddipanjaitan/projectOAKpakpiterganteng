@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Cosmic Calculator - Multi-Line Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="konversi bilangan.css">
+   
+</head>
+<body>
+    <div id="stars" class="stars"></div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-6xl font-extrabold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                🌌 Cosmic Calculator
+            </h1>
+            <p class="text-xl text-purple-300 font-light">Kalkulator Multi-Baris untuk Perjalanan Angka Antariksa</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex justify-center mb-8">
+            <div class="flex bg-black/30 p-2 rounded-xl backdrop-blur-md">
+                <button id="converterTab" class="tab-button px-8 py-3 rounded-lg font-semibold mr-2 active" onclick="switchTab('converter')">
+                    🔄 Konverter
+                </button>
+                <button id="calculatorTab" class="tab-button px-8 py-3 rounded-lg font-semibold" onclick="switchTab('calculator')">
+                    🧮 Kalkulator
+                </button>
+            </div>
+        </div>
+
+        <!-- Converter Section -->
+        <div id="converterSection" class="cosmic-container rounded-3xl p-8 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                        🚀 Stasiun Konversi
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-purple-300 text-sm font-medium mb-2">🌍 Dari Basis:</label>
+                                <select id="fromBase" class="cosmic-input w-full px-4 py-3 rounded-xl text-lg">
+                                    <option value="2">Biner (2)</option>
+                                    <option value="8">Oktal (8)</option>
+                                    <option value="10" selected>Desimal (10)</option>
+                                    <option value="16">Heksadesimal (16)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-purple-300 text-sm font-medium mb-2">🎯 Ke Basis:</label>
+                                <select id="toBase" class="cosmic-input w-full px-4 py-3 rounded-xl text-lg">
+                                    <option value="2" selected>Biner (2)</option>
+                                    <option value="8">Oktal (8)</option>
+                                    <option value="10">Desimal (10)</option>
+                                    <option value="16">Heksadesimal (16)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-purple-300 text-sm font-medium mb-2">🔢 Masukkan Angka:</label>
+                            <input type="text" id="input" class="cosmic-input w-full px-4 py-3 rounded-xl text-lg font-mono" 
+                                   placeholder="Contoh: 1010" oninput="realTimeConvert()">
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button onclick="konversi()" class="cosmic-button text-white px-8 py-3 rounded-xl font-semibold text-lg flex-1">
+                                ✨ Konversi
+                            </button>
+                            <button onclick="swapBases()" class="cosmic-button text-white px-6 py-3 rounded-xl font-semibold text-lg">
+                                🔄
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                        🌟 Hasil Perjalanan
+                    </h2>
+                    <div id="output" class="min-h-[200px]"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Section -->
+        <div id="calculatorSection" class="cosmic-container rounded-3xl p-8 mb-8" style="display: none;">
+            <h2 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent">
+                🧮 Cosmic Calculator Multi-Line
+            </h2>
+
+            <!-- Input Mode Toggle -->
+            <div class="flex justify-center mb-8">
+                <div class="flex bg-black/30 p-2 rounded-xl backdrop-blur-md">
+                    <button id="singleLineMode" class="mode-toggle mr-2 active" onclick="toggleInputMode('single')">
+                        📝 Single Line
+                    </button>
+                    <button id="multiLineMode" class="mode-toggle" onclick="toggleInputMode('multi')">
+                        📄 Multi Line
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <!-- Single Line Input Section -->
+                    <div id="singleLineSection" class="input-mode-section space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-purple-300 text-sm font-medium mb-2">🚀 Angka Pertama:</label>
+                                <input type="text" id="calcNum1" class="cosmic-input w-full px-4 py-3 rounded-xl text-lg font-mono" 
+                                       placeholder="Contoh: 1010" oninput="autoCalculate()">
+                                <select id="calcBase1" class="cosmic-input w-full px-4 py-2 rounded-xl text-sm mt-2" onchange="autoCalculate()">
+                                    <option value="2">Biner (2)</option>
+                                    <option value="8">Oktal (8)</option>
+                                    <option value="10" selected>Desimal (10)</option>
+                                    <option value="16">Heksadesimal (16)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-purple-300 text-sm font-medium mb-2">🎯 Angka Kedua:</label>
+                                <input type="text" id="calcNum2" class="cosmic-input w-full px-4 py-3 rounded-xl text-lg font-mono" 
+                                       placeholder="Contoh: 110" oninput="autoCalculate()">
+                                <select id="calcBase2" class="cosmic-input w-full px-4 py-2 rounded-xl text-sm mt-2" onchange="autoCalculate()">
+                                    <option value="2">Biner (2)</option>
+                                    <option value="8">Oktal (8)</option>
+                                    <option value="10" selected>Desimal (10)</option>
+                                    <option value="16">Heksadesimal (16)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi Line Input Section -->
+                    <div id="multiLineSection" class="input-mode-section space-y-6 hidden">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-purple-300 text-sm font-medium mb-2">🚀 Angka Pertama (Multi-Line):</label>
+                                <textarea id="calcNumMulti1" class="cosmic-textarea w-full px-4 py-3 rounded-xl text-lg" 
+                                          placeholder="Baris 1: 1010&#10;Baris 2: 1100&#10;Baris 3: 0101" 
+                                          oninput="autoCalculateMulti()"></textarea>
+                                <select id="calcBaseMulti1" class="cosmic-input w-full px-4 py-2 rounded-xl text-sm mt-2" onchange="autoCalculateMulti()">
+                                    <option value="2">Biner (2)</option>
+                                    <option value="8">Oktal (8)</option>
+                                    <option value="10" selected>Desimal (10)</option>
+                                    <option value="16">Heksadesimal (16)</option>
+                                </select>
+                                <div class="text-xs text-purple-300 mt-1">💡 Mode: <span id="mode1Display">Gabung Baris</span></div>
+                                <button onclick="toggleProcessMode(1)" class="text-xs text-purple-400 hover:text-purple-200 mt-1">
+                                    🔄 Ubah Mode
+                                </button>
+                            </div>
+                            <div>
+                                <label class="block text-purple-300 text-sm font-medium mb-2">🎯 Angka Kedua (Multi-Line):</label>
+                                <textarea id="calcNumMulti2" class="cosmic-textarea w-full px-4 py-3 rounded-xl text-lg" 
+                                          placeholder="Baris 1: 0011&#10;Baris 2: 1010&#10;Baris 3: 1111" 
+                                          oninput="autoCalculateMulti()"></textarea>
+                                <select id="calcBaseMulti2" class="cosmic-input w-full px-4 py-2 rounded-xl text-sm mt-2" onchange="autoCalculateMulti()">
+                                    <option value="2">Biner (2)</option>
+                                    <option value="8">Oktal (8)</option>
+                                    <option value="10" selected>Desimal (10)</option>
+                                    <option value="16">Heksadesimal (16)</option>
+                                </select>
+                                <div class="text-xs text-purple-300 mt-1">💡 Mode: <span id="mode2Display">Gabung Baris</span></div>
+                                <button onclick="toggleProcessMode(2)" class="text-xs text-purple-400 hover:text-purple-200 mt-1">
+                                    🔄 Ubah Mode
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operation Selection -->
+                    <div>
+                        <label class="block text-purple-300 text-sm font-medium mb-4">⚡ Pilih Operasi:</label>
+                        <div class="grid grid-cols-5 gap-3">
+                            <button class="operation-button px-4 py-3 rounded-xl font-bold text-xl" onclick="selectOperation('+')">+ Tambah</button>
+                            <button class="operation-button px-4 py-3 rounded-xl font-bold text-xl" onclick="selectOperation('-')">- Kurang</button>
+                            <button class="operation-button px-4 py-3 rounded-xl font-bold text-xl" onclick="selectOperation('×')">× Kali</button>
+                            <button class="operation-button px-4 py-3 rounded-xl font-bold text-xl" onclick="selectOperation('÷')">÷ Bagi</button>
+                            <button class="operation-button px-4 py-3 rounded-xl font-bold text-xl" onclick="selectOperation('%')">% Mod</button>
+                        </div>
+                    </div>
+
+                    <!-- Result Base Selection -->
+                    <div>
+                        <label class="block text-purple-300 text-sm font-medium mb-2">🌟 Basis Hasil:</label>
+                        <select id="calcResultBase" class="cosmic-input w-full px-4 py-3 rounded-xl text-lg" onchange="autoCalculate(); autoCalculateMulti();">
+                            <option value="2">Biner (2)</option>
+                            <option value="8">Oktal (8)</option>
+                            <option value="10" selected>Desimal (10)</option>
+                            <option value="16">Heksadesimal (16)</option>
+                        </select>
+                    </div>
+
+                    <button onclick="currentInputMode === 'single' ? calculateOperation() : calculateMultiOperation()" 
+                            class="cosmic-button text-white px-8 py-3 rounded-xl font-semibold text-lg w-full">
+                        ✨ Hitung
+                    </button>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                        🌟 Hasil Kalkulasi
+                    </h3>
+                    <div id="calcOutput" class="min-h-[200px]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script src="konversi bilangan.js"></script>
+ 
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a0033 30%, #330066 60%, #0c0c0c 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .cosmic-container {
+            background: rgba(5, 5, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.2);
+        }
+
+        .cosmic-input {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            color: white;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cosmic-input:focus {
+            border-color: #8a2be2;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+            outline: none;
+        }
+
+        .cosmic-textarea {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            color: white;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            resize: vertical;
+            min-height: 80px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .cosmic-textarea:focus {
+            border-color: #8a2be2;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+            outline: none;
+        }
+
+        .cosmic-button {
+            background: linear-gradient(45deg, #8a2be2, #1e90ff);
+            border: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cosmic-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+        }
+
+        .operation-button {
+            background: rgba(138, 43, 226, 0.2);
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            color: #8a2be2;
+            transition: all 0.3s ease;
+        }
+
+        .operation-button:hover, .operation-button.active {
+            background: rgba(138, 43, 226, 0.8);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .result-cosmic {
+            background: linear-gradient(135deg, rgba(5, 5, 15, 0.95), rgba(20, 5, 30, 0.95));
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            backdrop-filter: blur(15px);
+        }
+
+        #output {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        #output.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .shooting-star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, white, #87ceeb);
+            border-radius: 50%;
+            box-shadow: 0 0 10px white, 0 0 20px #87ceeb;
+            z-index: -2;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-200px) translateY(200px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes cosmicGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .copy-success {
+            background: linear-gradient(45deg, #00ff7f, #32cd32) !important;
+            color: white !important;
+        }
+
+        .tab-button {
+            background: rgba(138, 43, 226, 0.2);
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            color: #8a2be2;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: rgba(138, 43, 226, 0.8);
+            color: white;
+        }
+
+        .mode-toggle {
+            background: rgba(138, 43, 226, 0.2);
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            color: #8a2be2;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .mode-toggle.active {
+            background: rgba(138, 43, 226, 0.8);
+            color: white;
+        }
+
+        .input-mode-section {
+            transition: all 0.3s ease;
+        }
+
+        .input-mode-section.hidden {
+            display: none;
+        }
